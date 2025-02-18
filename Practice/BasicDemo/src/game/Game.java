@@ -23,6 +23,7 @@ public class    Game {
         //1. make an empty game world
         World world = new World();
 
+
         //2. populate it with bodies (ex: platforms, collectibles, characters)
 
         //make the ground
@@ -31,17 +32,22 @@ public class    Game {
         ground.setPosition(new Vec2(0f, -11.5f));
 
         // make a platform
-        Shape platformShape = new BoxShape(3.5f, 0.5f);
+        Shape platformShape = new BoxShape(3.5f, 0.5f,new Vec2(-8, 5.5f), 50 );
         StaticBody platform1 = new StaticBody(world, platformShape);
-        platform1.setPosition(new Vec2(-8, 5.5f));
+        //platform1.setPosition(new Vec2(-8, 5.5f));
 
 
         //make a character (with an overlaid image)
         Shape studentShape = new BoxShape(1,2);
         DynamicBody student = new DynamicBody(world, studentShape);
-        student.setPosition(new Vec2(7,-9));
+        student.setPosition(new Vec2(7,-1));
         student.addImage(new BodyImage("data/student.png", 4));
+        student.setAlwaysOutline(true);
 
+        //Circle shape
+        Shape circleShape = new CircleShape(0.5f);
+        DynamicBody circle = new DynamicBody(world, circleShape);
+        circle.setPosition(new Vec2(-10,8));
 
         //3. make a view to look into the game world
         UserView view = new UserView(world, 500, 500);
@@ -68,7 +74,7 @@ public class    Game {
         frame.setVisible(true);
 
         //optional: uncomment this to make a debugging view
-       //  JFrame debugView = new DebugViewer(world, 500, 500);
+         //JFrame debugView = new DebugViewer(world, 500, 500);
 
         // start our game world simulation!
         world.start();
